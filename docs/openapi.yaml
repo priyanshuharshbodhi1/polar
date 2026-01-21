@@ -1208,17 +1208,17 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from polar_sdk import Polar\nfrom polar_sdk.utils import parse_datetime\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.subscriptions.update(id=\"<value>\", subscription_update={\n        \"trial_end\": parse_datetime(\"2023-12-04T14:44:14.136Z\"),\n    })\n\n    # Handle response\n    print(res)"
+            "source": "from polar_sdk import Polar\nfrom polar_sdk.utils import parse_datetime\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.subscriptions.update(id=\"<value>\", subscription_update={\n        \"trial_end\": parse_datetime(\"2024-12-03T14:44:14.136Z\"),\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
             "label": "Typescript (SDK)",
-            "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.subscriptions.update({\n    id: \"<value>\",\n    subscriptionUpdate: {\n      trialEnd: new Date(\"2023-12-04T14:44:14.136Z\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.subscriptions.update({\n    id: \"<value>\",\n    subscriptionUpdate: {\n      trialEnd: new Date(\"2024-12-03T14:44:14.136Z\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->subscriptions->update(\n    id: '<value>',\n    subscriptionUpdate: new Components\\SubscriptionUpdateDiscount(\n        discountId: '<value>',\n    )\n\n);\n\nif ($response->subscription !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\nuse Polar\\Utils;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->subscriptions->update(\n    id: '<value>',\n    subscriptionUpdate: new Components\\SubscriptionUpdateTrial(\n        trialEnd: Utils\\Utils::parseDateTime('2024-12-03T14:44:14.136Z'),\n    )\n\n);\n\nif ($response->subscription !== null) {\n    // handle response\n}"
           }
         ]
       },
@@ -4307,7 +4307,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.products.create(request={\n        \"name\": \"<value>\",\n        \"prices\": [\n            {\n                \"amount_type\": \"custom\",\n                \"price_currency\": \"usd\",\n            },\n        ],\n        \"organization_id\": \"1dbfc517-0bbf-4301-9ba8-555ca42b9737\",\n    })\n\n    # Handle response\n    print(res)"
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.products.create(request={\n        \"name\": \"<value>\",\n        \"prices\": [\n            {\n                \"amount_type\": \"custom\",\n                \"price_currency\": \"usd\",\n                \"minimum_amount\": 50,\n            },\n        ],\n        \"organization_id\": \"1dbfc517-0bbf-4301-9ba8-555ca42b9737\",\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -5317,7 +5317,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.orders.update(id=\"<value>\", order_update={\n        \"billing_name\": \"<value>\",\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n    })\n\n    # Handle response\n    print(res)"
+            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.orders.update(id=\"<value>\", order_update={\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -5901,7 +5901,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Components\\RefundCreate(\n    orderId: '<value>',\n    reason: Components\\RefundReason::CustomerRequest,\n    amount: 90,\n);\n\n$response = $sdk->refunds->create(\n    request: $request\n);\n\nif ($response->refund !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Components\\RefundCreate(\n    orderId: '<value>',\n    reason: Components\\RefundReason::ServiceDisruption,\n    amount: 90,\n);\n\n$response = $sdk->refunds->create(\n    request: $request\n);\n\nif ($response->refund !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -6123,6 +6123,11 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.disputes.list({\n    organizationId: \"1dbfc517-0bbf-4301-9ba8-555ca42b9737\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Operations;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\DisputesListRequest(\n    organizationId: '1dbfc517-0bbf-4301-9ba8-555ca42b9737',\n);\n\n$responses = $sdk->disputes->list(\n    request: $request\n);\n\n\nforeach ($responses as $response) {\n    if ($response->statusCode === 200) {\n        // handle response\n    }\n}"
           }
         ]
       }
@@ -6201,6 +6206,11 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.disputes.get({\n    id: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->disputes->get(\n    id: '<value>'\n);\n\nif ($response->dispute !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -7947,17 +7957,17 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from datetime import date\nimport polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.metrics.get(start_date=date.fromisoformat(\"2025-03-14\"), end_date=date.fromisoformat(\"2025-03-18\"), interval=polar_sdk.TimeInterval.HOUR, timezone=\"UTC\", organization_id=None)\n\n    # Handle response\n    print(res)"
+            "source": "from datetime import date\nimport polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.metrics.get(start_date=date.fromisoformat(\"2026-03-14\"), end_date=date.fromisoformat(\"2026-03-18\"), interval=polar_sdk.TimeInterval.HOUR, timezone=\"UTC\", organization_id=None)\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
             "label": "Typescript (SDK)",
-            "source": "import { Polar } from \"@polar-sh/sdk\";\nimport { RFCDate } from \"@polar-sh/sdk/types/rfcdate.js\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.metrics.get({\n    startDate: new RFCDate(\"2025-03-14\"),\n    endDate: new RFCDate(\"2025-03-18\"),\n    interval: \"hour\",\n    organizationId: null,\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Polar } from \"@polar-sh/sdk\";\nimport { RFCDate } from \"@polar-sh/sdk/types/rfcdate.js\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.metrics.get({\n    startDate: new RFCDate(\"2026-03-14\"),\n    endDate: new RFCDate(\"2026-03-18\"),\n    interval: \"hour\",\n    organizationId: null,\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Brick\\DateTime\\LocalDate;\nuse Polar;\nuse Polar\\Models\\Components;\nuse Polar\\Models\\Operations;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\MetricsGetRequest(\n    startDate: LocalDate::parse('2025-03-14'),\n    endDate: LocalDate::parse('2025-03-18'),\n    interval: Components\\TimeInterval::Hour,\n    organizationId: null,\n);\n\n$response = $sdk->metrics->get(\n    request: $request\n);\n\nif ($response->metricsResponse !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Brick\\DateTime\\LocalDate;\nuse Polar;\nuse Polar\\Models\\Components;\nuse Polar\\Models\\Operations;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\MetricsGetRequest(\n    startDate: LocalDate::parse('2026-03-14'),\n    endDate: LocalDate::parse('2026-03-18'),\n    interval: Components\\TimeInterval::Hour,\n    organizationId: null,\n);\n\n$response = $sdk->metrics->get(\n    request: $request\n);\n\nif ($response->metricsResponse !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -10657,7 +10667,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.list(organization_id=\"1dbfc517-0bbf-4301-9ba8-555ca42b9737\", include_members=False, page=1, limit=10)\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.list(organization_id=\"1dbfc517-0bbf-4301-9ba8-555ca42b9737\", page=1, limit=10)\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           },
           {
             "lang": "typescript",
@@ -10734,7 +10744,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.create(customer_create={\n        \"external_id\": \"usr_1337\",\n        \"email\": \"customer@example.com\",\n        \"name\": \"John Doe\",\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n        \"tax_id\": [\n            \"911144442\",\n            \"us_ein\",\n        ],\n        \"organization_id\": \"1dbfc517-0bbf-4301-9ba8-555ca42b9737\",\n        \"owner\": {\n            \"email\": \"member@example.com\",\n            \"name\": \"Jane Doe\",\n            \"external_id\": \"usr_1337\",\n        },\n    }, include_members=False)\n\n    # Handle response\n    print(res)"
+            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.create(request={\n        \"external_id\": \"usr_1337\",\n        \"email\": \"customer@example.com\",\n        \"name\": \"John Doe\",\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n        \"tax_id\": [\n            \"911144442\",\n            \"us_ein\",\n        ],\n        \"organization_id\": \"1dbfc517-0bbf-4301-9ba8-555ca42b9737\",\n        \"owner\": {\n            \"email\": \"member@example.com\",\n            \"name\": \"Jane Doe\",\n            \"external_id\": \"usr_1337\",\n        },\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -10744,7 +10754,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Components\\CustomerCreate(\n    externalId: 'usr_1337',\n    email: 'customer@example.com',\n    name: 'John Doe',\n    billingAddress: new Components\\AddressInput(\n        country: Components\\CountryAlpha2Input::Us,\n    ),\n    taxId: [\n        '911144442',\n        'us_ein',\n    ],\n    organizationId: '1dbfc517-0bbf-4301-9ba8-555ca42b9737',\n);\n\n$response = $sdk->customers->create(\n    request: $request\n);\n\nif ($response->customer !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Components\\CustomerCreate(\n    externalId: 'usr_1337',\n    email: 'customer@example.com',\n    name: 'John Doe',\n    billingAddress: new Components\\AddressInput(\n        country: Components\\CountryAlpha2Input::Us,\n    ),\n    taxId: [\n        '911144442',\n        'us_ein',\n    ],\n    organizationId: '1dbfc517-0bbf-4301-9ba8-555ca42b9737',\n    owner: new Components\\OwnerCreate(\n        email: 'member@example.com',\n        name: 'Jane Doe',\n        externalId: 'usr_1337',\n    ),\n);\n\n$response = $sdk->customers->create(\n    request: $request\n);\n\nif ($response->customerWithMembers !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -10940,7 +10950,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.get(id=\"<value>\", include_members=False)\n\n    # Handle response\n    print(res)"
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.get(id=\"<value>\")\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -10950,7 +10960,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->customers->get(\n    id: '<value>'\n);\n\nif ($response->customer !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->customers->get(\n    id: '<value>'\n);\n\nif ($response->customerWithMembers !== null) {\n    // handle response\n}"
           }
         ]
       },
@@ -11041,7 +11051,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.update(id=\"<value>\", customer_update={\n        \"email\": \"customer@example.com\",\n        \"name\": \"John Doe\",\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n        \"tax_id\": [\n            \"911144442\",\n            \"us_ein\",\n        ],\n        \"external_id\": \"usr_1337\",\n    }, include_members=False)\n\n    # Handle response\n    print(res)"
+            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.update(id=\"<value>\", customer_update={\n        \"email\": \"customer@example.com\",\n        \"name\": \"John Doe\",\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n        \"tax_id\": [\n            \"911144442\",\n            \"us_ein\",\n        ],\n        \"external_id\": \"usr_1337\",\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -11051,7 +11061,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$customerUpdate = new Components\\CustomerUpdate(\n    email: 'customer@example.com',\n    name: 'John Doe',\n    billingAddress: new Components\\AddressInput(\n        country: Components\\CountryAlpha2Input::Us,\n    ),\n    taxId: [\n        '911144442',\n        'us_ein',\n    ],\n    externalId: 'usr_1337',\n);\n\n$response = $sdk->customers->update(\n    id: '<value>',\n    customerUpdate: $customerUpdate\n\n);\n\nif ($response->customer !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$customerUpdate = new Components\\CustomerUpdate(\n    email: 'customer@example.com',\n    name: 'John Doe',\n    billingAddress: new Components\\AddressInput(\n        country: Components\\CountryAlpha2Input::Us,\n    ),\n    taxId: [\n        '911144442',\n        'us_ein',\n    ],\n    externalId: 'usr_1337',\n);\n\n$response = $sdk->customers->update(\n    id: '<value>',\n    customerUpdate: $customerUpdate\n\n);\n\nif ($response->customerWithMembers !== null) {\n    // handle response\n}"
           }
         ]
       },
@@ -11217,7 +11227,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.get_external(external_id=\"<id>\", include_members=False)\n\n    # Handle response\n    print(res)"
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.get_external(external_id=\"<id>\")\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -11227,7 +11237,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->customers->getExternal(\n    externalId: '<id>'\n);\n\nif ($response->customer !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->customers->getExternal(\n    externalId: '<id>'\n);\n\nif ($response->customerWithMembers !== null) {\n    // handle response\n}"
           }
         ]
       },
@@ -11317,7 +11327,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.update_external(external_id=\"<id>\", customer_update_external_id={\n        \"email\": \"customer@example.com\",\n        \"name\": \"John Doe\",\n        \"billing_address\": None,\n        \"tax_id\": [\n            \"911144442\",\n            \"us_ein\",\n        ],\n    }, include_members=False)\n\n    # Handle response\n    print(res)"
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.customers.update_external(external_id=\"<id>\", customer_update_external_id={\n        \"email\": \"customer@example.com\",\n        \"name\": \"John Doe\",\n        \"billing_address\": None,\n        \"tax_id\": [\n            \"911144442\",\n            \"us_ein\",\n        ],\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -11327,7 +11337,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$customerUpdateExternalID = new Components\\CustomerUpdateExternalID(\n    email: 'customer@example.com',\n    name: 'John Doe',\n    billingAddress: null,\n    taxId: [\n        '911144442',\n        'us_ein',\n    ],\n);\n\n$response = $sdk->customers->updateExternal(\n    externalId: '<id>',\n    customerUpdateExternalID: $customerUpdateExternalID\n\n);\n\nif ($response->customer !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$customerUpdateExternalID = new Components\\CustomerUpdateExternalID(\n    email: 'customer@example.com',\n    name: 'John Doe',\n    billingAddress: null,\n    taxId: [\n        '911144442',\n        'us_ein',\n    ],\n);\n\n$response = $sdk->customers->updateExternal(\n    externalId: '<id>',\n    customerUpdateExternalID: $customerUpdateExternalID\n\n);\n\nif ($response->customerWithMembers !== null) {\n    // handle response\n}"
           }
         ]
       },
@@ -11744,6 +11754,11 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.members.listMembers({});\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$responses = $sdk->members->listMembers(\n    page: 1,\n    limit: 10\n\n);\n\n\nforeach ($responses as $response) {\n    if ($response->statusCode === 200) {\n        // handle response\n    }\n}"
           }
         ]
       },
@@ -11824,11 +11839,174 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.members.createMember({\n    customerId: \"<value>\",\n    email: \"member@example.com\",\n    name: \"Jane Doe\",\n    externalId: \"usr_1337\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Components\\MemberCreate(\n    customerId: '<value>',\n    email: 'member@example.com',\n    name: 'Jane Doe',\n    externalId: 'usr_1337',\n);\n\n$response = $sdk->members->createMember(\n    request: $request\n);\n\nif ($response->member !== null) {\n    // handle response\n}"
           }
         ]
       }
     },
     "/v1/members/{id}": {
+      "get": {
+        "tags": [
+          "members",
+          "public",
+          "mcp"
+        ],
+        "summary": "Get Member",
+        "description": "Get a member by ID.\n\nThe authenticated user or organization must have access to the member's organization.\n\n**Scopes**: `members:read` `members:write`",
+        "operationId": "members:get_member",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Member retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Member not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "read",
+            "members"
+          ]
+        },
+        "x-speakeasy-group": "members",
+        "x-speakeasy-name-override": "get_member",
+        "x-codeSamples": [
+          {
+            "lang": "python",
+            "label": "Python (SDK)",
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.members.get_member(id=\"572bebad-ee17-4d04-a50f-6596a7d92cf3\")\n\n    # Handle response\n    print(res)"
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "members",
+          "public",
+          "mcp"
+        ],
+        "summary": "Update Member",
+        "description": "Update a member.\n\nOnly name and role can be updated.\nThe authenticated user or organization must have access to the member's organization.\n\n**Scopes**: `members:write`",
+        "operationId": "members:update_member",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Member updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Member"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Member not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceNotFound"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": false,
+          "scopes": [
+            "write",
+            "members"
+          ]
+        },
+        "x-speakeasy-group": "members",
+        "x-speakeasy-name-override": "update_member",
+        "x-codeSamples": [
+          {
+            "lang": "python",
+            "label": "Python (SDK)",
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.members.update_member(id=\"ab9b628a-6dbd-4f07-bcd6-163a8b5b7de4\", member_update={\n        \"name\": \"Jane Doe\",\n    })\n\n    # Handle response\n    print(res)"
+          }
+        ]
+      },
       "delete": {
         "tags": [
           "members",
@@ -11898,6 +12076,11 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  await polar.members.deleteMember({\n    id: \"913247e9-8f2b-4bd1-a47e-9842d173a7cb\",\n  });\n\n\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n\n\n$response = $sdk->members->deleteMember(\n    id: '913247e9-8f2b-4bd1-a47e-9842d173a7cb'\n);\n\nif ($response->statusCode === 200) {\n    // handle response\n}"
           }
         ]
       }
@@ -11915,6 +12098,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -12152,7 +12338,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -12215,6 +12402,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -12265,7 +12455,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -12307,6 +12498,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -12378,7 +12572,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -12434,10 +12629,14 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -12474,7 +12673,7 @@
           "public"
         ],
         "summary": "Update Customer",
-        "description": "Update authenticated customer.\n\n**Scopes**: `customer_portal:write`",
+        "description": "Update authenticated customer.",
         "operationId": "customer_portal:customers:update",
         "requestBody": {
           "content": {
@@ -12511,10 +12710,10 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
-        ],
-        "x-polar-allowed-subjects": [
-          "Customer"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -12553,11 +12752,14 @@
           "public"
         ],
         "summary": "List Customer Payment Methods",
-        "description": "Get saved payment methods of the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Get saved payment methods of the authenticated customer.",
         "operationId": "customer_portal:customers:list_payment_methods",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -12610,9 +12812,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
           "inputs": [
@@ -12667,11 +12866,14 @@
           "public"
         ],
         "summary": "Add Customer Payment Method",
-        "description": "Add a payment method to the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Add a payment method to the authenticated customer.",
         "operationId": "customer_portal:customers:add_payment_method",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "requestBody": {
@@ -12707,9 +12909,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -12747,7 +12946,7 @@
           "public"
         ],
         "summary": "Confirm Customer Payment Method",
-        "description": "Confirm a payment method for the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Confirm a payment method for the authenticated customer.",
         "operationId": "customer_portal:customers:confirm_payment_method",
         "requestBody": {
           "content": {
@@ -12795,10 +12994,10 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
-        ],
-        "x-polar-allowed-subjects": [
-          "Customer"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -12837,11 +13036,14 @@
           "public"
         ],
         "summary": "Delete Customer Payment Method",
-        "description": "Delete a payment method from the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Delete a payment method from the authenticated customer.",
         "operationId": "customer_portal:customers:delete_payment_method",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -12891,9 +13093,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -12936,6 +13135,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13059,7 +13261,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -13122,6 +13325,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13171,7 +13377,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -13215,6 +13422,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13289,7 +13499,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -13326,11 +13537,13 @@
           "public"
         ],
         "summary": "Assign Seat",
-        "description": "**Scopes**: `customer_portal:write`",
         "operationId": "customer_portal:seats:assign_seat",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "requestBody": {
@@ -13377,9 +13590,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -13417,11 +13627,13 @@
           "public"
         ],
         "summary": "Revoke Seat",
-        "description": "**Scopes**: `customer_portal:write`",
         "operationId": "customer_portal:seats:revoke_seat",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13467,9 +13679,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -13507,11 +13716,13 @@
           "public"
         ],
         "summary": "Resend Invitation",
-        "description": "**Scopes**: `customer_portal:write`",
         "operationId": "customer_portal:seats:resend_invitation",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13560,9 +13771,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -13624,10 +13832,14 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -13683,10 +13895,14 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -13717,6 +13933,54 @@
         ]
       }
     },
+    "/v1/customer-portal/customer-session/user": {
+      "get": {
+        "tags": [
+          "customer_portal",
+          "customer-session",
+          "public"
+        ],
+        "summary": "Get Authenticated Portal User",
+        "description": "Get information about the currently authenticated portal user.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "operationId": "customer_portal:customer-session:get_authenticated_user",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortalAuthenticatedUser"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "customer_session": []
+          },
+          {
+            "member_session": []
+          }
+        ],
+        "x-polar-allowed-subjects": [
+          "Customer",
+          "Member"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "customer_portal.customer-session",
+        "x-speakeasy-name-override": "get_authenticated_user",
+        "x-codeSamples": [
+          {
+            "lang": "python",
+            "label": "Python (SDK)",
+            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar() as polar:\n\n    res = polar.customer_portal.customer_session.get_authenticated_user(security=polar_sdk.CustomerPortalCustomerSessionGetAuthenticatedUserSecurity(\n        customer_session=\"<YOUR_BEARER_TOKEN_HERE>\",\n    ))\n\n    # Handle response\n    print(res)"
+          }
+        ]
+      }
+    },
     "/v1/customer-portal/downloadables/": {
       "get": {
         "tags": [
@@ -13730,6 +13994,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13821,7 +14088,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -13884,6 +14152,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -13982,7 +14253,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -14045,6 +14317,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -14092,7 +14367,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -14386,11 +14662,14 @@
           "public"
         ],
         "summary": "List Orders",
-        "description": "List orders of the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "List orders of the authenticated customer.",
         "operationId": "customer_portal:orders:list",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -14575,9 +14854,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
           "inputs": [
@@ -14634,11 +14910,14 @@
           "public"
         ],
         "summary": "Get Order",
-        "description": "Get an order by ID for the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Get an order by ID for the authenticated customer.",
         "operationId": "customer_portal:orders:get",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -14687,9 +14966,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -14725,11 +15001,14 @@
           "public"
         ],
         "summary": "Update Order",
-        "description": "Update an order for the authenticated customer.\n\n**Scopes**: `customer_portal:write`",
+        "description": "Update an order for the authenticated customer.",
         "operationId": "customer_portal:orders:update",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -14788,9 +15067,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -14805,7 +15081,7 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar() as polar:\n\n    res = polar.customer_portal.orders.update(security=polar_sdk.CustomerPortalOrdersUpdateSecurity(\n        customer_session=\"<YOUR_BEARER_TOKEN_HERE>\",\n    ), id=\"<value>\", customer_order_update={\n        \"billing_name\": \"<value>\",\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n    })\n\n    # Handle response\n    print(res)"
+            "source": "import polar_sdk\nfrom polar_sdk import Polar\n\n\nwith Polar() as polar:\n\n    res = polar.customer_portal.orders.update(security=polar_sdk.CustomerPortalOrdersUpdateSecurity(\n        customer_session=\"<YOUR_BEARER_TOKEN_HERE>\",\n    ), id=\"<value>\", customer_order_update={\n        \"billing_address\": {\n            \"country\": polar_sdk.CountryAlpha2Input.US,\n        },\n    })\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
@@ -14828,11 +15104,14 @@
           "public"
         ],
         "summary": "Generate Order Invoice",
-        "description": "Trigger generation of an order's invoice.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Trigger generation of an order's invoice.",
         "operationId": "customer_portal:orders:generate_invoice",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -14877,9 +15156,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -14915,11 +15191,14 @@
           "public"
         ],
         "summary": "Get Order Invoice",
-        "description": "Get an order's invoice data.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Get an order's invoice data.",
         "operationId": "customer_portal:orders:invoice",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -14968,9 +15247,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -15008,11 +15284,14 @@
           "public"
         ],
         "summary": "Get Order Payment Status",
-        "description": "Get the current payment status for an order.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Get the current payment status for an order.",
         "operationId": "customer_portal:orders:get_payment_status",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15061,9 +15340,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -15101,11 +15377,14 @@
           "public"
         ],
         "summary": "Confirm Retry Payment",
-        "description": "Confirm a retry payment using a Stripe confirmation token.\n\n**Scopes**: `customer_portal:write`",
+        "description": "Confirm a retry payment using a Stripe confirmation token.",
         "operationId": "customer_portal:orders:confirm_retry_payment",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15174,9 +15453,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -15288,7 +15564,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()->build();\n\n\n\n$response = $sdk->customerPortal->organizations->get(\n    slug: '<value>'\n);\n\nif ($response->customerOrganization !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\n\n$sdk = Polar\\Polar::builder()->build();\n\n\n\n$response = $sdk->customerPortal->organizations->get(\n    slug: '<value>'\n);\n\nif ($response->customerOrganizationData !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -15306,6 +15582,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15457,7 +15736,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
@@ -15520,6 +15800,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15569,7 +15852,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -15611,6 +15895,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15680,7 +15967,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -15722,6 +16010,9 @@
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15781,7 +16072,8 @@
           }
         },
         "x-polar-allowed-subjects": [
-          "Customer"
+          "Customer",
+          "Member"
         ],
         "x-speakeasy-mcp": {
           "disabled": true
@@ -15820,11 +16112,14 @@
           "public"
         ],
         "summary": "List Wallets",
-        "description": "List wallets of the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "List wallets of the authenticated customer.",
         "operationId": "customer_portal:wallets:list",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -15901,9 +16196,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-pagination": {
           "type": "offsetLimit",
           "inputs": [
@@ -15960,11 +16252,14 @@
           "public"
         ],
         "summary": "Get Wallet",
-        "description": "Get a wallet by ID for the authenticated customer.\n\n**Scopes**: `customer_portal:read` `customer_portal:write`",
+        "description": "Get a wallet by ID for the authenticated customer.",
         "operationId": "customer_portal:wallets:get",
         "security": [
           {
             "customer_session": []
+          },
+          {
+            "member_session": []
           }
         ],
         "parameters": [
@@ -16013,9 +16308,6 @@
             }
           }
         },
-        "x-polar-allowed-subjects": [
-          "Customer"
-        ],
         "x-speakeasy-mcp": {
           "disabled": true
         },
@@ -16582,7 +16874,7 @@
           "public"
         ],
         "summary": "Create Customer Session",
-        "description": "Create a customer session.\n\n**Scopes**: `customer_sessions:write`",
+        "description": "Create a customer session.\n\nFor organizations with `member_model_enabled`, this will automatically\ncreate a member session for the owner member of the customer.\n\n**Scopes**: `customer_sessions:write`",
         "operationId": "customer-sessions:create",
         "requestBody": {
           "content": {
@@ -16653,6 +16945,65 @@
             "lang": "php",
             "label": "PHP (SDK)",
             "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Components\\CustomerSessionCustomerExternalIDCreate(\n    returnUrl: 'https://example.com/account',\n    externalCustomerId: '<id>',\n);\n\n$response = $sdk->customerSessions->create(\n    request: $request\n);\n\nif ($response->customerSession !== null) {\n    // handle response\n}"
+          }
+        ]
+      }
+    },
+    "/v1/member-sessions/": {
+      "post": {
+        "tags": [
+          "member-sessions",
+          "public"
+        ],
+        "summary": "Create Member Session",
+        "description": "Create a member session.\n\nThis endpoint is only available for organizations with `member_model_enabled`\nand `seat_based_pricing_enabled` feature flags enabled.\n\n**Scopes**: `member_sessions:write`",
+        "operationId": "member-sessions:create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberSessionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Member session created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberSession"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-polar-allowed-subjects": [
+          "Organization",
+          "User"
+        ],
+        "x-speakeasy-mcp": {
+          "disabled": true
+        },
+        "x-speakeasy-group": "member-sessions",
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "python",
+            "label": "Python (SDK)",
+            "source": "from polar_sdk import Polar\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.member_sessions.create(request={\n        \"member_id\": \"<value>\",\n        \"return_url\": \"https://example.com/account\",\n    })\n\n    # Handle response\n    print(res)"
           }
         ]
       }
@@ -17064,7 +17415,7 @@
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Operations;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\EventsListRequest(\n    organizationId: '1dbfc517-0bbf-4301-9ba8-555ca42b9737',\n);\n\n$responses = $sdk->events->list(\n    request: $request\n);\n\n\nforeach ($responses as $response) {\n    if ($response->statusCode === 200) {\n        // handle response\n    }\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Operations;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\EventsListRequest(\n    organizationId: '1dbfc517-0bbf-4301-9ba8-555ca42b9737',\n);\n\n$response = $sdk->events->list(\n    request: $request\n);\n\nif ($response->responseEventsList !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -17788,6 +18139,11 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.eventTypes.list({\n    organizationId: \"1dbfc517-0bbf-4301-9ba8-555ca42b9737\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Operations;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\EventTypesListRequest(\n    organizationId: '1dbfc517-0bbf-4301-9ba8-555ca42b9737',\n);\n\n$responses = $sdk->eventTypes->list(\n    request: $request\n);\n\n\nforeach ($responses as $response) {\n    if ($response->statusCode === 200) {\n        // handle response\n    }\n}"
           }
         ]
       }
@@ -17869,6 +18225,11 @@
             "lang": "typescript",
             "label": "Typescript (SDK)",
             "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.eventTypes.update({\n    id: \"<value>\",\n    eventTypeUpdate: {\n      label: \"<value>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "php",
+            "label": "PHP (SDK)",
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$eventTypeUpdate = new Components\\EventTypeUpdate(\n    label: '<value>',\n);\n\n$response = $sdk->eventTypes->update(\n    id: '<value>',\n    eventTypeUpdate: $eventTypeUpdate\n\n);\n\nif ($response->eventType !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -18541,17 +18902,17 @@
           {
             "lang": "python",
             "label": "Python (SDK)",
-            "source": "import polar_sdk\nfrom polar_sdk import Polar\nfrom polar_sdk.utils import parse_datetime\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.meters.quantities(id=\"<value>\", start_timestamp=parse_datetime(\"2025-11-25T04:37:16.823Z\"), end_timestamp=parse_datetime(\"2025-11-26T17:06:00.727Z\"), interval=polar_sdk.TimeInterval.DAY)\n\n    # Handle response\n    print(res)"
+            "source": "import polar_sdk\nfrom polar_sdk import Polar\nfrom polar_sdk.utils import parse_datetime\n\n\nwith Polar(\n    access_token=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as polar:\n\n    res = polar.meters.quantities(id=\"<value>\", start_timestamp=parse_datetime(\"2026-11-25T04:37:16.823Z\"), end_timestamp=parse_datetime(\"2026-11-26T17:06:00.727Z\"), interval=polar_sdk.TimeInterval.DAY)\n\n    # Handle response\n    print(res)"
           },
           {
             "lang": "typescript",
             "label": "Typescript (SDK)",
-            "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.meters.quantities({\n    id: \"<value>\",\n    startTimestamp: new Date(\"2025-11-25T04:37:16.823Z\"),\n    endTimestamp: new Date(\"2025-11-26T17:06:00.727Z\"),\n    interval: \"day\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Polar } from \"@polar-sh/sdk\";\n\nconst polar = new Polar({\n  accessToken: process.env[\"POLAR_ACCESS_TOKEN\"] ?? \"\",\n});\n\nasync function run() {\n  const result = await polar.meters.quantities({\n    id: \"<value>\",\n    startTimestamp: new Date(\"2026-11-25T04:37:16.823Z\"),\n    endTimestamp: new Date(\"2026-11-26T17:06:00.727Z\"),\n    interval: \"day\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "php",
             "label": "PHP (SDK)",
-            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\nuse Polar\\Models\\Operations;\nuse Polar\\Utils;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\MetersQuantitiesRequest(\n    id: '<value>',\n    startTimestamp: Utils\\Utils::parseDateTime('2025-11-25T04:37:16.823Z'),\n    endTimestamp: Utils\\Utils::parseDateTime('2025-11-26T17:06:00.727Z'),\n    interval: Components\\TimeInterval::Day,\n);\n\n$response = $sdk->meters->quantities(\n    request: $request\n);\n\nif ($response->meterQuantities !== null) {\n    // handle response\n}"
+            "source": "declare(strict_types=1);\n\nrequire 'vendor/autoload.php';\n\nuse Polar;\nuse Polar\\Models\\Components;\nuse Polar\\Models\\Operations;\nuse Polar\\Utils;\n\n$sdk = Polar\\Polar::builder()\n    ->setSecurity(\n        '<YOUR_BEARER_TOKEN_HERE>'\n    )\n    ->build();\n\n$request = new Operations\\MetersQuantitiesRequest(\n    id: '<value>',\n    startTimestamp: Utils\\Utils::parseDateTime('2026-11-25T04:37:16.823Z'),\n    endTimestamp: Utils\\Utils::parseDateTime('2026-11-26T17:06:00.727Z'),\n    interval: Components\\TimeInterval::Day,\n);\n\n$response = $sdk->meters->quantities(\n    request: $request\n);\n\nif ($response->meterQuantities !== null) {\n    // handle response\n}"
           }
         ]
       }
@@ -19948,7 +20309,7 @@
     "subscription.uncanceled": {
       "post": {
         "summary": "subscription.uncanceled",
-        "description": "Sent when a subscription is uncanceled.\n\n**Discord & Slack support:** Full",
+        "description": "Sent when a customer revokes a pending cancellation.\n\nWhen a customer cancels with \"at period end\", they retain access until the\nsubscription would renew. During this time, they can change their mind and\nundo the cancellation. This event is triggered when they do so.\n\n**Discord & Slack support:** Full",
         "operationId": "_endpointsubscription_uncanceled_post",
         "requestBody": {
           "content": {
@@ -21808,6 +22169,77 @@
             "type": "array",
             "title": "Scopes"
           },
+          "scope_display_names": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Scope Display Names",
+            "default": {
+              "openid": "OpenID",
+              "profile": "Read your profile",
+              "email": "Read your email address",
+              "web:read": "Web Read Access",
+              "web:write": "Web Write Access",
+              "user:read": "User Read",
+              "user:write": "Delete your user account",
+              "organizations:read": "Read your organizations",
+              "organizations:write": "Create or modify organizations",
+              "custom_fields:read": "Read custom fields",
+              "custom_fields:write": "Create or modify custom fields",
+              "discounts:read": "Read discounts",
+              "discounts:write": "Create or modify discounts",
+              "checkout_links:read": "Read checkout links",
+              "checkout_links:write": "Create or modify checkout links",
+              "checkouts:read": "Read checkout sessions",
+              "checkouts:write": "Create or modify checkout sessions",
+              "transactions:read": "Read transactions",
+              "transactions:write": "Create or modify transactions",
+              "payouts:read": "Read payouts",
+              "payouts:write": "Create or modify payouts",
+              "products:read": "Read products",
+              "products:write": "Create or modify products",
+              "benefits:read": "Read benefits",
+              "benefits:write": "Create or modify benefits",
+              "events:read": "Read events",
+              "events:write": "Create events",
+              "meters:read": "Read meters",
+              "meters:write": "Create or modify meters",
+              "files:read": "Read file uploads",
+              "files:write": "Create or modify file uploads",
+              "subscriptions:read": "Read subscriptions made on your organizations",
+              "subscriptions:write": "Create or modify subscriptions made on your organizations",
+              "customers:read": "Read customers",
+              "customers:write": "Create or modify customers",
+              "members:read": "Read members",
+              "members:write": "Create or modify members",
+              "wallets:read": "Read wallets",
+              "wallets:write": "Create or modify wallets",
+              "disputes:read": "Read disputes",
+              "customer_meters:read": "Read customer meters",
+              "customer_sessions:write": "Create or modify customer sessions",
+              "member_sessions:write": "Create or modify member sessions",
+              "customer_seats:read": "Read customer seats",
+              "customer_seats:write": "Create or modify customer seats",
+              "orders:read": "Read orders made on your organizations",
+              "orders:write": "Modify orders made on your organizations",
+              "refunds:read": "Read refunds made on your organizations",
+              "refunds:write": "Create or modify refunds",
+              "payments:read": "Read payments made on your organizations",
+              "metrics:read": "Read metrics",
+              "webhooks:read": "Read webhooks",
+              "webhooks:write": "Create or modify webhooks",
+              "external_organizations:read": "Read external organizations",
+              "license_keys:read": "Read license keys",
+              "license_keys:write": "Modify license keys",
+              "customer_portal:read": "Read your orders, subscriptions and benefits",
+              "customer_portal:write": "Create or modify your orders, subscriptions and benefits",
+              "notifications:read": "Read notifications",
+              "notifications:write": "Mark notifications as read",
+              "notification_recipients:read": "Read notification recipients",
+              "notification_recipients:write": "Create or modify notification recipients"
+            }
+          },
           "organizations": {
             "items": {
               "$ref": "#/components/schemas/AuthorizeOrganization"
@@ -21852,6 +22284,77 @@
             },
             "type": "array",
             "title": "Scopes"
+          },
+          "scope_display_names": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Scope Display Names",
+            "default": {
+              "openid": "OpenID",
+              "profile": "Read your profile",
+              "email": "Read your email address",
+              "web:read": "Web Read Access",
+              "web:write": "Web Write Access",
+              "user:read": "User Read",
+              "user:write": "Delete your user account",
+              "organizations:read": "Read your organizations",
+              "organizations:write": "Create or modify organizations",
+              "custom_fields:read": "Read custom fields",
+              "custom_fields:write": "Create or modify custom fields",
+              "discounts:read": "Read discounts",
+              "discounts:write": "Create or modify discounts",
+              "checkout_links:read": "Read checkout links",
+              "checkout_links:write": "Create or modify checkout links",
+              "checkouts:read": "Read checkout sessions",
+              "checkouts:write": "Create or modify checkout sessions",
+              "transactions:read": "Read transactions",
+              "transactions:write": "Create or modify transactions",
+              "payouts:read": "Read payouts",
+              "payouts:write": "Create or modify payouts",
+              "products:read": "Read products",
+              "products:write": "Create or modify products",
+              "benefits:read": "Read benefits",
+              "benefits:write": "Create or modify benefits",
+              "events:read": "Read events",
+              "events:write": "Create events",
+              "meters:read": "Read meters",
+              "meters:write": "Create or modify meters",
+              "files:read": "Read file uploads",
+              "files:write": "Create or modify file uploads",
+              "subscriptions:read": "Read subscriptions made on your organizations",
+              "subscriptions:write": "Create or modify subscriptions made on your organizations",
+              "customers:read": "Read customers",
+              "customers:write": "Create or modify customers",
+              "members:read": "Read members",
+              "members:write": "Create or modify members",
+              "wallets:read": "Read wallets",
+              "wallets:write": "Create or modify wallets",
+              "disputes:read": "Read disputes",
+              "customer_meters:read": "Read customer meters",
+              "customer_sessions:write": "Create or modify customer sessions",
+              "member_sessions:write": "Create or modify member sessions",
+              "customer_seats:read": "Read customer seats",
+              "customer_seats:write": "Create or modify customer seats",
+              "orders:read": "Read orders made on your organizations",
+              "orders:write": "Modify orders made on your organizations",
+              "refunds:read": "Read refunds made on your organizations",
+              "refunds:write": "Create or modify refunds",
+              "payments:read": "Read payments made on your organizations",
+              "metrics:read": "Read metrics",
+              "webhooks:read": "Read webhooks",
+              "webhooks:write": "Create or modify webhooks",
+              "external_organizations:read": "Read external organizations",
+              "license_keys:read": "Read license keys",
+              "license_keys:write": "Modify license keys",
+              "customer_portal:read": "Read your orders, subscriptions and benefits",
+              "customer_portal:write": "Create or modify your orders, subscriptions and benefits",
+              "notifications:read": "Read notifications",
+              "notifications:write": "Mark notifications as read",
+              "notification_recipients:read": "Read notification recipients",
+              "notification_recipients:write": "Create or modify notification recipients"
+            }
           }
         },
         "type": "object",
@@ -21894,6 +22397,852 @@
           "avatar_url"
         ],
         "title": "AuthorizeUser"
+      },
+      "BalanceDisputeEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.dispute",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceDisputeMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceDisputeEvent",
+        "description": "An event created by Polar when an order is disputed."
+      },
+      "BalanceDisputeMetadata": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "title": "Transaction Id"
+          },
+          "dispute_id": {
+            "type": "string",
+            "title": "Dispute Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "presentment_amount": {
+            "type": "integer",
+            "title": "Presentment Amount"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "title": "Presentment Currency"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "tax_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax State"
+          },
+          "tax_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Country"
+          },
+          "fee": {
+            "type": "integer",
+            "title": "Fee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "dispute_id",
+          "amount",
+          "currency",
+          "presentment_amount",
+          "presentment_currency",
+          "tax_amount",
+          "fee"
+        ],
+        "title": "BalanceDisputeMetadata"
+      },
+      "BalanceDisputeReversalEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.dispute_reversal",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceDisputeMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceDisputeReversalEvent",
+        "description": "An event created by Polar when a dispute is won and funds are reinstated."
+      },
+      "BalanceOrderEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.order",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceOrderMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceOrderEvent",
+        "description": "An event created by Polar when an order is paid."
+      },
+      "BalanceOrderMetadata": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "title": "Transaction Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "presentment_amount": {
+            "type": "integer",
+            "title": "Presentment Amount"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "title": "Presentment Currency"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "tax_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax State"
+          },
+          "tax_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Country"
+          },
+          "fee": {
+            "type": "integer",
+            "title": "Fee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "order_id",
+          "amount",
+          "currency",
+          "presentment_amount",
+          "presentment_currency",
+          "tax_amount",
+          "fee"
+        ],
+        "title": "BalanceOrderMetadata"
+      },
+      "BalanceRefundEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.refund",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceRefundMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceRefundEvent",
+        "description": "An event created by Polar when an order is refunded."
+      },
+      "BalanceRefundMetadata": {
+        "properties": {
+          "transaction_id": {
+            "type": "string",
+            "title": "Transaction Id"
+          },
+          "refund_id": {
+            "type": "string",
+            "title": "Refund Id"
+          },
+          "order_id": {
+            "type": "string",
+            "title": "Order Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "subscription_id": {
+            "type": "string",
+            "title": "Subscription Id"
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount"
+          },
+          "currency": {
+            "type": "string",
+            "title": "Currency"
+          },
+          "presentment_amount": {
+            "type": "integer",
+            "title": "Presentment Amount"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "title": "Presentment Currency"
+          },
+          "refundable_amount": {
+            "type": "integer",
+            "title": "Refundable Amount"
+          },
+          "tax_amount": {
+            "type": "integer",
+            "title": "Tax Amount"
+          },
+          "tax_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax State"
+          },
+          "tax_country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Country"
+          },
+          "fee": {
+            "type": "integer",
+            "title": "Fee"
+          }
+        },
+        "type": "object",
+        "required": [
+          "transaction_id",
+          "refund_id",
+          "amount",
+          "currency",
+          "presentment_amount",
+          "presentment_currency",
+          "tax_amount",
+          "fee"
+        ],
+        "title": "BalanceRefundMetadata"
+      },
+      "BalanceRefundReversalEvent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "The timestamp of the event."
+          },
+          "organization_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Organization Id",
+            "description": "The ID of the organization owning the event.",
+            "examples": [
+              "1dbfc517-0bbf-4301-9ba8-555ca42b9737"
+            ],
+            "x-polar-selector-widget": {
+              "displayProperty": "name",
+              "resourceName": "Organization",
+              "resourceRoot": "/v1/organizations"
+            }
+          },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Id",
+            "description": "ID of the customer in your Polar organization associated with the event."
+          },
+          "customer": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The customer associated with the event."
+          },
+          "external_customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Customer Id",
+            "description": "ID of the customer in your system associated with the event."
+          },
+          "child_count": {
+            "type": "integer",
+            "title": "Child Count",
+            "description": "Number of direct child events linked to this event.",
+            "default": 0
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid4"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "description": "The ID of the parent event."
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "description": "Human readable label of the event type."
+          },
+          "source": {
+            "type": "string",
+            "const": "system",
+            "title": "Source",
+            "description": "The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API."
+          },
+          "name": {
+            "type": "string",
+            "const": "balance.refund_reversal",
+            "title": "Name",
+            "description": "The name of the event."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/BalanceRefundMetadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "organization_id",
+          "customer_id",
+          "customer",
+          "external_customer_id",
+          "label",
+          "source",
+          "name",
+          "metadata"
+        ],
+        "title": "BalanceRefundReversalEvent",
+        "description": "An event created by Polar when a refund is reverted."
       },
       "Benefit": {
         "anyOf": [
@@ -23899,6 +25248,16 @@
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
+          "member": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Member"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "benefit": {
             "$ref": "#/components/schemas/BenefitCustom"
           },
@@ -24090,6 +25449,16 @@
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
+          "member": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Member"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "benefit": {
             "$ref": "#/components/schemas/BenefitDiscord"
           },
@@ -24264,6 +25633,16 @@
           },
           "customer": {
             "$ref": "#/components/schemas/Customer"
+          },
+          "member": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Member"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "benefit": {
             "$ref": "#/components/schemas/BenefitDownloadables"
@@ -24490,6 +25869,16 @@
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
+          "member": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Member"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "benefit": {
             "$ref": "#/components/schemas/BenefitGitHubRepository"
           },
@@ -24666,6 +26055,16 @@
           "customer": {
             "$ref": "#/components/schemas/Customer"
           },
+          "member": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Member"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "benefit": {
             "$ref": "#/components/schemas/BenefitLicenseKeys"
           },
@@ -24712,6 +26111,10 @@
           },
           "benefit_type": {
             "$ref": "#/components/schemas/BenefitType"
+          },
+          "member_id": {
+            "type": "string",
+            "title": "Member Id"
           }
         },
         "type": "object",
@@ -24867,6 +26270,16 @@
           },
           "customer": {
             "$ref": "#/components/schemas/Customer"
+          },
+          "member": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Member"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "benefit": {
             "$ref": "#/components/schemas/BenefitMeterCredit"
@@ -29645,6 +31058,18 @@
             "title": "Embed Origin",
             "description": "If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page."
           },
+          "currency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresentmentCurrency",
+                "maxLength": 3,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "product_id": {
             "type": "string",
             "format": "uuid4",
@@ -29985,6 +31410,18 @@
             ],
             "title": "Embed Origin",
             "description": "If you plan to embed the checkout session, set this to the Origin of the embedding page. It'll allow the Polar iframe to communicate with the parent page."
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresentmentCurrency",
+                "maxLength": 3,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "products": {
             "items": {
@@ -31403,6 +32840,18 @@
             "maxProperties": 50,
             "title": "Metadata",
             "description": "Key-value object allowing you to store additional information.\n\nThe key must be a string with a maximum length of **40 characters**.\nThe value must be either:\n\n* A string with a maximum length of **500 characters**\n* An integer\n* A floating-point number\n* A boolean\n\nYou can store up to **50 key-value pairs**."
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresentmentCurrency",
+                "maxLength": 3,
+                "minLength": 3
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "discount_id": {
             "anyOf": [
@@ -36672,7 +38121,7 @@
               }
             ],
             "title": "Billing Name",
-            "description": "The name of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+            "description": "The name of the customer that should appear on the invoice."
           },
           "billing_address": {
             "anyOf": [
@@ -36683,14 +38132,10 @@
                 "type": "null"
               }
             ],
-            "description": "The address of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+            "description": "The address of the customer that should appear on the invoice. Country and state fields cannot be updated."
           }
         },
         "type": "object",
-        "required": [
-          "billing_name",
-          "billing_address"
-        ],
         "title": "CustomerOrderUpdate",
         "description": "Schema to update an order."
       },
@@ -37352,7 +38797,32 @@
               }
             ],
             "title": "Customer Id",
-            "description": "The assigned customer ID"
+            "description": "The customer ID. When member_model_enabled is true, this is the billing customer (purchaser). When false, this is the seat member customer."
+          },
+          "member_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Id",
+            "description": "The member ID of the seat occupant"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "Email of the seat member (set when member_model_enabled is true)"
           },
           "customer_email": {
             "anyOf": [
@@ -43685,14 +45155,7 @@
             "description": "The currency."
           },
           "minimum_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Minimum Amount",
             "description": "The minimum amount the customer can pay."
           },
@@ -45640,6 +47103,125 @@
         ],
         "title": "MemberRole"
       },
+      "MemberSession": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Creation timestamp of the object."
+          },
+          "modified_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modified At",
+            "description": "Last modification timestamp of the object."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Id",
+            "description": "The ID of the object."
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Expires At"
+          },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url"
+          },
+          "member_portal_url": {
+            "type": "string",
+            "title": "Member Portal Url"
+          },
+          "member_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Member Id"
+          },
+          "member": {
+            "$ref": "#/components/schemas/Member"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "modified_at",
+          "id",
+          "token",
+          "expires_at",
+          "return_url",
+          "member_portal_url",
+          "member_id",
+          "member",
+          "customer_id",
+          "customer"
+        ],
+        "title": "MemberSession",
+        "description": "A member session that can be used to authenticate as a member in the customer portal."
+      },
+      "MemberSessionCreate": {
+        "properties": {
+          "member_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Member Id",
+            "description": "ID of the member to create a session for."
+          },
+          "return_url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Url",
+            "description": "When set, a back button will be shown in the customer portal to return to this URL.",
+            "examples": [
+              "https://example.com/account"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "member_id"
+        ],
+        "title": "MemberSessionCreate",
+        "description": "Schema for creating a member session using a member ID."
+      },
       "MemberSortProperty": {
         "type": "string",
         "enum": [
@@ -45647,6 +47229,43 @@
           "-created_at"
         ],
         "title": "MemberSortProperty"
+      },
+      "MemberUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 256,
+                "description": "The name of the member.",
+                "examples": [
+                  "Jane Doe"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "role": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MemberRole"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The role of the member within the customer.",
+            "examples": [
+              "member"
+            ]
+          }
+        },
+        "type": "object",
+        "title": "MemberUpdate",
+        "description": "Schema for updating a member."
       },
       "MetadataOutputType": {
         "additionalProperties": {
@@ -48240,7 +49859,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write disputes:read customer_meters:read customer_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write disputes:read customer_meters:read customer_sessions:write member_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -48361,7 +49980,7 @@
           "scope": {
             "type": "string",
             "title": "Scope",
-            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write disputes:read customer_meters:read customer_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
+            "default": "openid profile email user:read user:write organizations:read organizations:write custom_fields:read custom_fields:write discounts:read discounts:write checkout_links:read checkout_links:write checkouts:read checkouts:write transactions:read transactions:write payouts:read payouts:write products:read products:write benefits:read benefits:write events:read events:write meters:read meters:write files:read files:write subscriptions:read subscriptions:write customers:read customers:write members:read members:write wallets:read wallets:write disputes:read customer_meters:read customer_sessions:write member_sessions:write customer_seats:read customer_seats:write orders:read orders:write refunds:read refunds:write payments:read metrics:read webhooks:read webhooks:write external_organizations:read license_keys:read license_keys:write repositories:read repositories:write issues:read issues:write customer_portal:read customer_portal:write notifications:read notifications:write notification_recipients:read notification_recipients:write"
           },
           "client_name": {
             "type": "string",
@@ -49997,7 +51616,7 @@
               }
             ],
             "title": "Billing Name",
-            "description": "The name of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+            "description": "The name of the customer that should appear on the invoice."
           },
           "billing_address": {
             "anyOf": [
@@ -50008,14 +51627,10 @@
                 "type": "null"
               }
             ],
-            "description": "The address of the customer that should appear on the invoice. Can't be updated after the invoice is generated."
+            "description": "The address of the customer that should appear on the invoice. Country and state fields cannot be updated."
           }
         },
         "type": "object",
-        "required": [
-          "billing_name",
-          "billing_address"
-        ],
         "title": "OrderUpdate",
         "description": "Schema to update an order."
       },
@@ -51487,6 +53102,73 @@
         ],
         "title": "PaymentStatus"
       },
+      "PortalAuthenticatedUser": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "description": "Type of authenticated user: 'customer' or 'member'"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "User's name, if available."
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "description": "User's email address."
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid4",
+            "title": "Customer Id",
+            "description": "Associated customer ID."
+          },
+          "role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role",
+            "description": "Member role (owner, billing_manager, member). Only set for members."
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "email",
+          "customer_id"
+        ],
+        "title": "PortalAuthenticatedUser",
+        "description": "Information about the authenticated portal user."
+      },
+      "PresentmentCurrency": {
+        "type": "string",
+        "enum": [
+          "usd",
+          "eur",
+          "gbp",
+          "cad",
+          "aud",
+          "jpy",
+          "chf",
+          "sek"
+        ],
+        "title": "PresentmentCurrency"
+      },
       "Product": {
         "properties": {
           "id": {
@@ -52345,14 +54027,7 @@
             "description": "The currency."
           },
           "minimum_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
             "title": "Minimum Amount",
             "description": "The minimum amount the customer can pay."
           },
@@ -52415,19 +54090,11 @@
             "default": "usd"
           },
           "minimum_amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999,
-                "minimum": 50,
-                "description": "The price in cents."
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "integer",
+            "minimum": 50,
             "title": "Minimum Amount",
-            "description": "The minimum amount the customer can pay."
+            "description": "The minimum amount the customer can pay.",
+            "default": 50
           },
           "maximum_amount": {
             "anyOf": [
@@ -52944,7 +54611,7 @@
             "description": "The currency."
           },
           "seat_tiers": {
-            "$ref": "#/components/schemas/ProductPriceSeatTiers",
+            "$ref": "#/components/schemas/ProductPriceSeatTiers-Output",
             "description": "Tiered pricing based on seat quantity"
           }
         },
@@ -52980,7 +54647,7 @@
             "default": "usd"
           },
           "seat_tiers": {
-            "$ref": "#/components/schemas/ProductPriceSeatTiers",
+            "$ref": "#/components/schemas/ProductPriceSeatTiers-Input",
             "description": "Tiered pricing based on seat quantity"
           }
         },
@@ -53029,7 +54696,7 @@
         "title": "ProductPriceSeatTier",
         "description": "A pricing tier for seat-based pricing."
       },
-      "ProductPriceSeatTiers": {
+      "ProductPriceSeatTiers-Input": {
         "properties": {
           "tiers": {
             "items": {
@@ -53046,7 +54713,45 @@
           "tiers"
         ],
         "title": "ProductPriceSeatTiers",
-        "description": "List of pricing tiers for seat-based pricing."
+        "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)"
+      },
+      "ProductPriceSeatTiers-Output": {
+        "properties": {
+          "tiers": {
+            "items": {
+              "$ref": "#/components/schemas/ProductPriceSeatTier"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tiers",
+            "description": "List of pricing tiers"
+          },
+          "minimum_seats": {
+            "type": "integer",
+            "title": "Minimum Seats",
+            "description": "Minimum number of seats required for purchase, derived from first tier."
+          },
+          "maximum_seats": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Maximum Seats",
+            "description": "Maximum number of seats allowed for purchase, derived from last tier. None for unlimited."
+          }
+        },
+        "type": "object",
+        "required": [
+          "tiers",
+          "minimum_seats",
+          "maximum_seats"
+        ],
+        "title": "ProductPriceSeatTiers",
+        "description": "List of pricing tiers for seat-based pricing.\n\nThe minimum and maximum seat limits are derived from the tiers:\n- minimum_seats = first tier's min_seats\n- maximum_seats = last tier's max_seats (None for unlimited)"
       },
       "ProductPriceSource": {
         "type": "string",
@@ -53908,6 +55613,7 @@
           "disputes:read",
           "customer_meters:read",
           "customer_sessions:write",
+          "member_sessions:write",
           "customer_seats:read",
           "customer_seats:write",
           "orders:read",
@@ -53961,6 +55667,7 @@
           "files:write": "Create or modify file uploads",
           "license_keys:read": "Read license keys",
           "license_keys:write": "Modify license keys",
+          "member_sessions:write": "Create or modify member sessions",
           "members:read": "Read members",
           "members:write": "Create or modify members",
           "meters:read": "Read meters",
@@ -56551,11 +58258,31 @@
           },
           {
             "$ref": "#/components/schemas/CustomerDeletedEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceOrderEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceRefundEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceRefundReversalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceDisputeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/BalanceDisputeReversalEvent"
           }
         ],
         "discriminator": {
           "propertyName": "name",
           "mapping": {
+            "balance.dispute": "#/components/schemas/BalanceDisputeEvent",
+            "balance.dispute_reversal": "#/components/schemas/BalanceDisputeReversalEvent",
+            "balance.order": "#/components/schemas/BalanceOrderEvent",
+            "balance.refund": "#/components/schemas/BalanceRefundEvent",
+            "balance.refund_reversal": "#/components/schemas/BalanceRefundReversalEvent",
             "benefit.cycled": "#/components/schemas/BenefitCycledEvent",
             "benefit.granted": "#/components/schemas/BenefitGrantedEvent",
             "benefit.revoked": "#/components/schemas/BenefitRevokedEvent",
@@ -58454,7 +60181,7 @@
           "data"
         ],
         "title": "WebhookSubscriptionUncanceledPayload",
-        "description": "Sent when a subscription is uncanceled.\n\n**Discord & Slack support:** Full"
+        "description": "Sent when a customer revokes a pending cancellation.\n\nWhen a customer cancels with \"at period end\", they retain access until the\nsubscription would renew. During this time, they can change their mind and\nundo the cancellation. This event is triggered when they do so.\n\n**Discord & Slack support:** Full"
       },
       "WebhookSubscriptionUpdatedPayload": {
         "properties": {
@@ -58752,6 +60479,11 @@
       "customer_session": {
         "type": "http",
         "description": "Customer session tokens are specific tokens that are used to authenticate customers on your organization. You can create those sessions programmatically using the [Create Customer Session endpoint](/api-reference/customer-portal/sessions/create).",
+        "scheme": "bearer"
+      },
+      "member_session": {
+        "type": "http",
+        "description": "Member session tokens are specific tokens that are used to authenticate members on your organization. You can create those sessions programmatically using the [Create Member Session endpoint](/api-reference/member-portal/sessions/create).",
         "scheme": "bearer"
       },
       "access_token": {
