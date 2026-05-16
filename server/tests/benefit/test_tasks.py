@@ -380,6 +380,29 @@ class TestBenefitEnqueueGrants:
 
         reset_meters_mock.assert_called_once()
 
+    async def test_skips_meter_reset_when_disabled(
+        self,
+        mocker: MockerFixture,
+        subscription: Subscription,
+        session: AsyncSession,
+    ) -> None:
+        reset_meters_mock = mocker.patch.object(
+            subscription_service,
+            "reset_meters",
+            spec=SubscriptionService.reset_meters,
+        )
+
+        session.expunge_all()
+
+        await benefit_enqueue_grants(
+            subscription.customer_id,
+            [],
+            subscription_id=subscription.id,
+            reset_meters=False,
+        )
+
+        reset_meters_mock.assert_not_called()
+
     async def test_skips_meter_reset_without_subscription(
         self,
         mocker: MockerFixture,

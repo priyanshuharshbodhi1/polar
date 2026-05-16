@@ -523,6 +523,7 @@ class TestEnqueueBenefitsGrants:
             customer_id=customer.id,
             grant_benefit_ids=[],
             member_id=None,
+            reset_meters=True,
             subscription_id=subscription.id,
         )
         group_mock.return_value.add_completion_callback.assert_called_once_with(
@@ -614,8 +615,73 @@ class TestEnqueueBenefitsGrants:
         assert callback_kwargs["customer_id"] == customer.id
         assert set(callback_kwargs["grant_benefit_ids"]) == {b.id for b in new_benefits}
         assert callback_kwargs["member_id"] is None
+        assert callback_kwargs["reset_meters"] is True
         assert callback_kwargs["subscription_id"] == subscription.id
 
+        group_mock.return_value.add_completion_callback.assert_called_once_with(
+            enqueue_grants_actor.message.return_value
+        )
+
+    async def test_product_benefit_refresh_can_skip_meter_reset(
+        self,
+        mocker: MockerFixture,
+        session: AsyncSession,
+        save_fixture: SaveFixture,
+        product: Product,
+        benefits: list[Benefit],
+        subscription: Subscription,
+        customer: Customer,
+    ) -> None:
+        group_mock = mocker.patch("polar.benefit.grant.service.group")
+        broker_mock = mocker.patch("polar.benefit.grant.service.dramatiq.get_broker")
+
+        revoke_actor = MagicMock()
+        enqueue_grants_actor = MagicMock()
+        actors = {
+            "benefit.revoke": revoke_actor,
+            "benefit.reset_meters_and_enqueue_grants": enqueue_grants_actor,
+        }
+        broker_mock.return_value.get_actor.side_effect = lambda name: actors.get(
+            name, MagicMock()
+        )
+
+        kept_benefit = benefits[0]
+        removed_benefit = benefits[1]
+
+        for benefit in (kept_benefit, removed_benefit):
+            grant = BenefitGrant(
+                subscription=subscription, customer=customer, benefit=benefit
+            )
+            grant.set_granted()
+            await save_fixture(grant)
+
+        product = await set_product_benefits(
+            save_fixture, product=product, benefits=[kept_benefit]
+        )
+
+        await benefit_grant_service.enqueue_benefits_grants(
+            session,
+            "grant",
+            customer,
+            product,
+            subscription=subscription,
+            reset_meters=False,
+        )
+
+        revoke_actor.message.assert_called_once_with(
+            customer_id=customer.id,
+            benefit_id=removed_benefit.id,
+            member_id=None,
+            subscription_id=subscription.id,
+        )
+        group_mock.assert_called_once_with([revoke_actor.message.return_value])
+        enqueue_grants_actor.message.assert_called_once_with(
+            customer_id=customer.id,
+            grant_benefit_ids=[],
+            member_id=None,
+            subscription_id=subscription.id,
+            reset_meters=False,
+        )
         group_mock.return_value.add_completion_callback.assert_called_once_with(
             enqueue_grants_actor.message.return_value
         )

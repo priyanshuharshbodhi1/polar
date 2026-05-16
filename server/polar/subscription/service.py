@@ -2234,6 +2234,7 @@ class SubscriptionService:
         subscription: Subscription,
         *,
         delay: int | None = None,
+        reset_meters: bool = True,
     ) -> None:
         product_repository = ProductRepository.from_session(session)
         product = await product_repository.get_by_id(subscription.product_id)
@@ -2278,6 +2279,7 @@ class SubscriptionService:
             customer_id=subscription.customer_id,
             product_id=product.id,
             subscription_id=subscription.id,
+            reset_meters=reset_meters,
             delay=delay,
         )
 
@@ -2294,6 +2296,7 @@ class SubscriptionService:
             enqueue_job(
                 "subscription.enqueue_benefits_grants",
                 subscription_id,
+                reset_meters=False,
                 delay=calculate_delay(index),
             )
 

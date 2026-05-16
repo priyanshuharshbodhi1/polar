@@ -382,6 +382,7 @@ class BenefitGrantService(ResourceServiceReader[BenefitGrant]):
         customer: Customer,
         product: Product,
         member_id: UUID | None = None,
+        reset_meters: bool = True,
         **scope: Unpack[BenefitGrantScope],
     ) -> None:
         repository = BenefitGrantRepository.from_session(session)
@@ -457,6 +458,7 @@ class BenefitGrantService(ResourceServiceReader[BenefitGrant]):
                     customer_id=customer.id,
                     grant_benefit_ids=grant_benefit_ids,
                     member_id=member_id,
+                    reset_meters=reset_meters,
                     **scope_args,
                 )
             )
@@ -467,6 +469,7 @@ class BenefitGrantService(ResourceServiceReader[BenefitGrant]):
                 customer_id=customer.id,
                 grant_benefit_ids=grant_benefit_ids,
                 member_id=member_id,
+                reset_meters=reset_meters,
                 **scope_args,
             )
 

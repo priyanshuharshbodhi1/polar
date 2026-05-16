@@ -74,6 +74,7 @@ async def enqueue_benefits_grants(
     customer_id: uuid.UUID,
     product_id: uuid.UUID,
     member_id: uuid.UUID | None = None,
+    reset_meters: bool = True,
     **scope: Unpack[BenefitGrantScopeArgs],
 ) -> None:
     async with AsyncSessionMaker() as session:
@@ -96,7 +97,13 @@ async def enqueue_benefits_grants(
         resolved_scope = await resolve_scope(session, scope)
 
         await benefit_grant_service.enqueue_benefits_grants(
-            session, task, customer, product, member_id=member_id, **resolved_scope
+            session,
+            task,
+            customer,
+            product,
+            member_id=member_id,
+            reset_meters=reset_meters,
+            **resolved_scope,
         )
 
 
@@ -107,9 +114,10 @@ async def benefit_enqueue_grants(
     customer_id: uuid.UUID,
     grant_benefit_ids: list[uuid.UUID],
     member_id: uuid.UUID | None = None,
+    reset_meters: bool = True,
     **scope: Unpack[BenefitGrantScopeArgs],
 ) -> None:
-    if subscription_id := scope.get("subscription_id"):
+    if reset_meters and (subscription_id := scope.get("subscription_id")):
         async with AsyncSessionMaker() as session:
             repository = SubscriptionRepository.from_session(session)
             subscription = await repository.get_by_id(

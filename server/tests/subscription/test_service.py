@@ -1229,6 +1229,7 @@ class TestCycle:
             customer_id=customer.id,
             product_id=product.id,
             subscription_id=subscription.id,
+            reset_meters=True,
             delay=None,
         )
         enqueue_job_mock.assert_any_call(
@@ -2093,6 +2094,7 @@ class TestEnqueueBenefitsGrants:
                     customer_id=subscription.customer_id,
                     product_id=product.id,
                     subscription_id=subscription.id,
+                    reset_meters=True,
                     delay=None,
                 )
             ]
@@ -2138,6 +2140,7 @@ class TestEnqueueBenefitsGrants:
                     customer_id=subscription.customer_id,
                     product_id=product.id,
                     subscription_id=subscription.id,
+                    reset_meters=True,
                     delay=None,
                 )
             ]
@@ -2205,6 +2208,7 @@ class TestEnqueueBenefitsGrants:
             customer_id=customer.id,
             product_id=product.id,
             subscription_id=subscription.id,
+            reset_meters=True,
             delay=None,
         )
 
@@ -2246,6 +2250,7 @@ class TestUpdateProductBenefitsGrants:
         actual_ids = {call.args[1] for call in enqueue_calls}
         expected_ids = {subscription_1.id, subscription_2.id}
         assert actual_ids == expected_ids
+        assert all(call.kwargs["reset_meters"] is False for call in enqueue_calls)
 
 
 @pytest.mark.asyncio
@@ -3299,6 +3304,7 @@ class TestMarkPastDue:
             customer_id=subscription.customer.id,
             product_id=subscription.product.id,
             subscription_id=subscription.id,
+            reset_meters=True,
             delay=None,
         )
 
@@ -4877,6 +4883,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
             customer_id=customer.id,
             product_id=product.id,
             subscription_id=subscription.id,
+            reset_meters=True,
             delay=None,
         )
 
@@ -4911,6 +4918,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
             customer_id=customer.id,
             product_id=product.id,
             subscription_id=subscription.id,
+            reset_meters=True,
             delay=None,
         )
 
@@ -4943,6 +4951,7 @@ class TestEnqueueBenefitsGrantsGracePeriod:
             customer_id=customer.id,
             product_id=product.id,
             subscription_id=subscription.id,
+            reset_meters=True,
             delay=None,
         )
 
